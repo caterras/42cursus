@@ -17,14 +17,12 @@
 int fill_storage(fd, *storage)
 {
 	int	i;
-	int	j;
 	int	flag;
 	char *buffer;
 	int	n;
 
 
 	flag = 0;
-	j = 0;
 	n = 1;
 	while(!flag)
 	{
@@ -34,17 +32,27 @@ int fill_storage(fd, *storage)
 		i = 0;
 		while(buffer[i])
 		{
-			storage = malloc(n * BUFFER_SIZE * sizeof(char));
-			storage[i] = line[i];
-			if(buffer[i] != '\n' || buffer[i] != '\0')
+			if(buffer[i] == '\n' || buffer[i] == '\0')
 				flag = 1;
 			i++;
-			j++;
 		}
-		free(buffer);
-		if (flag = 0)
-			free(storage);
-		n++;
+		if (flag = 1 & n = 1)
+		{
+			storage = malloc(BUFFER_SIZE * sizeof(char));
+			i = 0;
+			while(buffer[i])
+			{
+				storage[i] = buffer[i];
+				i++;
+			}
+			free(buffer);
+		}
+		else
+		{
+			storage = strjoin(storage, buffer);
+			free(buffer);
+			n++;
+		}
 	}
 }
 
